@@ -19,10 +19,28 @@ class TelevisionShowsController < ApplicationController
     end
 
     def show
-      television_show = Television_show.find(params[:id])
+      television_show = Television_show.find_by(slug: params[:slug])
       render json: television_show
     end
 
+    def update
+        television_show = Television_show.find_by(slug: params[:slug])
+
+        if television_show.update(tv_show_params)
+            render json: television_show
+        else
+            render json: {errors: television_show.errors.full_messages}, status: :unprocessable_entity
+        end
+    end
+
+    def destroy
+        television_show = Television_show.find_by(slug: params[:slug])
+      if television_show.destroy
+        head :no_content
+      else
+        render json: {errors: television_show.errors.full_messages}, status: :unprocessable_entity
+      end
+    end
 
   
     private

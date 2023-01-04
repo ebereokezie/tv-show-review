@@ -1,14 +1,5 @@
 class ReviewsController < ApplicationController
     before_action :authorize
-    def index
-        reviews = Review.all 
-       render json: reviews
-    end
-
-    def show
-        review = Review.find(params[:id])
-        render json: review, include: :television_show
-      end
 
     def create
         television_show = Television_show.find(params[:id])
@@ -23,6 +14,15 @@ class ReviewsController < ApplicationController
         end
     end
 
+    def destroy
+        review = Review.find(params[:id])
+
+        if review.destroy
+            head :no_content
+        else
+            render json: {errors: review.errors.full_messages}, status: :unprocessable_entity
+        end
+    end
     private
 
     def reviews_params

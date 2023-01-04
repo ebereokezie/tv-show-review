@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  resources :television_shows
+  resources :television_shows, param: :slug
   resources :reviews, only: [:create, :destroy]
 
 end
