@@ -2,6 +2,9 @@ class TelevisionShowsController < ApplicationController
     rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
+        television_show = Television_show.all
+
+        render json: television_show
     end
 
     def create 
@@ -14,7 +17,7 @@ class TelevisionShowsController < ApplicationController
             render json: {errors: television_show.errors.full_messages}, status: :unprocessable_entity
         end
     end
-    
+
     def show
       television_show = Television_show.find(params[:id])
       render json: television_show
