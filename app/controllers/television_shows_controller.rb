@@ -2,14 +2,14 @@ class TelevisionShowsController < ApplicationController
     # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
 
     def index
-        television_show = Television_show.all
+        television_show = TelevisionShow.all
 
         render json: television_show
     end
 
     def create 
         user = User.find(session[:user_id])
-        television_show = Television_show.create(tv_show_params)
+        television_show = TelevisionShow.create(tv_show_params)
         television_show.user_id = user.id
         if television_show.valid?
             render json: television_show, status: :created
@@ -19,12 +19,12 @@ class TelevisionShowsController < ApplicationController
     end
 
     def show
-      television_show = Television_show.find_by(slug: params[:slug])
+      television_show = TelevisionShow.find_by(slug: params[:slug])
       render json: television_show
     end
 
     def update
-        television_show = Television_show.find_by(slug: params[:slug])
+        television_show = TelevisionShow.find_by(slug: params[:slug])
 
         if television_show.update(tv_show_params)
             render json: television_show
@@ -34,7 +34,7 @@ class TelevisionShowsController < ApplicationController
     end
 
     def destroy
-        television_show = Television_show.find_by(slug: params[:slug])
+        television_show = TelevisionShow.find_by(slug: params[:slug])
       if television_show.destroy
         head :no_content
       else
