@@ -10,18 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_04_172455) do
+ActiveRecord::Schema.define(version: 2023_01_06_032653) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "reviews", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "television_show_id"
     t.string "comment"
     t.integer "rating"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "television_show_id", null: false
+    t.index ["television_show_id"], name: "index_reviews_on_television_show_id"
   end
 
   create_table "television_shows", force: :cascade do |t|
@@ -43,4 +44,5 @@ ActiveRecord::Schema.define(version: 2023_01_04_172455) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "reviews", "television_shows"
 end

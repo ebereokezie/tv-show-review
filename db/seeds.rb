@@ -38,14 +38,14 @@ television_shows = TelevisionShow.create([
 
 reviews = Review.create([
    {
-    television_show_id: 1,
     comment: "This is a great episode",
-    rating: 4
+    rating: 4,
+    television_show: television_shows.first
     },
     {
-    television_show_id: 2,
     comment: "This is a bad episode",
-    rating: 2
+    rating: 2,
+    television_show: television_shows.second
     }
 ])
 
