@@ -8,7 +8,7 @@ class TelevisionShow < ApplicationRecord
 
     before_create :slugify
     def slugify
-        self.slug = name.parameterize
+        self.slug = title.parameterize
     end
 
     def average_rating
