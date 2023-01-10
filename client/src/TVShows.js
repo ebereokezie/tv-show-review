@@ -1,5 +1,5 @@
 import React, { useState, useEffect }from 'react'
-
+import TVShowCard from './TVShowCard'
 function TVShows() {
     const [tvshows, setTvshows] = useState([])
 
@@ -8,10 +8,11 @@ function TVShows() {
         .then((data) => data.json())
         .then(data => setTvshows(data))
     }, [])
-
+console.log(tvshows)
     const tvShowList = tvshows.map( tvShow => {
-        return (<li key = {tvShow.id}> {tvShow.title} </li>)
+        return (<TVShowCard key = {tvShow.id} tvShow ={tvShow} />)
     })
+
     return (
     <div className = "TVShowsHome">
            <h1 className= "Header">FreshApples</h1>

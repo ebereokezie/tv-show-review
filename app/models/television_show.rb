@@ -12,6 +12,10 @@ class TelevisionShow < ApplicationRecord
     end
 
     def average_rating
-        reviews.average(:rating).round(2).to_f
+        if reviews.present?
+        reviews.average(:rating)
+        else 
+            return 0
+        end
     end
 end
