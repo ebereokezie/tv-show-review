@@ -14,7 +14,7 @@ console.log(tvshows)
     })
 
     return (
-    <div className = "TVShowsHome">
+    <div className ="TVShowsHome">
            <h1 className= "Header">FreshApples</h1>
            <h2 className = "subheader">A new take on Television Show reviews</h2>
         <div className = "grid">

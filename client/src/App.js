@@ -2,6 +2,7 @@ import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import TVShow from './TVShow';
 import TVShows from './TVShows';
+import "../src/App.css"
 
 function App() {
   return (
