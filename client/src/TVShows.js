@@ -6,14 +6,22 @@ function TVShows() {
     useEffect(()=> {
         fetch("/television_shows")
         .then((data) => data.json())
-        .then(data => console.log(data))
+        .then(data => setTvshows(data))
     }, [])
+
+    const tvShowList = tvshows.map( tvShow => {
+        return (<li key = {tvShow.id}> {tvShow.title} </li>)
+    })
     return (
-    <div>
-        This is the TV shows#index view for our app.
+    <div className = "TVShowsHome">
+           <h1 className= "Header">FreshApples</h1>
+           <h2 className = "subheader">A new take on Television Show reviews</h2>
+        <div className = "grid">
+            {tvShowList}
+        </div>
     </div>
     );
   }
 
   export default TVShows
-  
+   
