@@ -36,16 +36,29 @@ television_shows = TelevisionShow.create([
     }
 ])
 
+users = User.create([
+    {
+        username: "Brian Griffin",
+        password_digest: "iAmOnFamilyGuy"
+    },
+    {
+        username: "Tom Brady",
+        password_digest: "SevenTimeChamp"
+    }
+])
+
 reviews = Review.create([
    {
     comment: "This is a great episode",
     rating: 4,
-    television_show: television_shows.first
+    television_show_id: TelevisionShow.first.id,
+    user_id: User.first.id
     },
     {
     comment: "This is a bad episode",
     rating: 2,
-    television_show: television_shows.second
+    television_show_id: TelevisionShow.second.id,
+    user_id: User.second.id
     }
 ])
 
