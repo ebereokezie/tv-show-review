@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import TVShowInfo from './TVShowInfo';
-function TVShow({tvshows}) {
+import ReviewForm from './ReviewForm';
+function TVShow({tvshows, setTvshows}) {
 
 
 const {slug} = useParams();
@@ -16,6 +17,16 @@ useEffect(()=> {
     .then(data => setTvshow(data))
 }, [])
 
+function handleUpdatedTVShow(updatedTVShowObj){
+    const updatedTVShow = tvshows.map((televisionShow) => {
+        if(televisionShow.id === updatedTVShowObj.id){
+            return updatedTVShow
+        } else {
+            return televisionShow
+        }
+    });
+    setTvshows(updatedTVShow)
+}
 
 console.log(tvshow.reviews)
     return(
@@ -25,7 +36,9 @@ console.log(tvshow.reviews)
                 <div className = 'review-list'></div>
             </div>
             <div className='inner-column'>
-                <div className = "review-form"></div>
+                <div className = "review-form">
+                    <ReviewForm tvshow = {tvshow} onUpdateTVShow = {handleUpdatedTVShow}  />
+                </div>
             </div>
         </div>
     )

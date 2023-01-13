@@ -1,5 +1,6 @@
 class TelevisionShowsController < ApplicationController
     # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
+    before_action :authorize
 
     def index
         television_show = TelevisionShow.all
@@ -19,6 +20,7 @@ class TelevisionShowsController < ApplicationController
     end
 
     def show
+      user = User.find(session[:user_id])
       television_show = TelevisionShow.find_by(slug: params[:slug])
       render json: television_show
     end

@@ -1,14 +1,13 @@
 import React, { useState, useEffect }from 'react'
 import TVShowCard from './TVShowCard'
-function TVShows() {
-    const [tvshows, setTvshows] = useState([])
-
+function TVShows({tvshows, setTvshows }) {
+    
     useEffect(()=> {
         fetch("/television_shows")
         .then((data) => data.json())
         .then(data => setTvshows(data))
     }, [])
-console.log(tvshows)
+
     const tvShowList = tvshows.map( tvShow => {
         return (<TVShowCard key = {tvShow.id} tvShow ={tvShow} />)
     })
