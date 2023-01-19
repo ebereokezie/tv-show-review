@@ -9,6 +9,7 @@ function LoginForm({ onLogin }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setErrors([]);
     setIsLoading(true);
     fetch("/login", {
       method: "POST",
@@ -21,7 +22,7 @@ function LoginForm({ onLogin }) {
       if (data.ok) {
         data.json().then((user) => onLogin(user));
       } else {
-        data.json().then((err) => setErrors(err.errors));
+        data.json().then((err) => console.log(err.errors));
       }
     });
   }

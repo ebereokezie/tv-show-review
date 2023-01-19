@@ -1,5 +1,5 @@
 class ReviewsController < ApplicationController
-    before_action :authorize
+    before_action :authorized
 
     def create
         user = User.find(session[:user_id])

@@ -8,7 +8,7 @@ import "../src/App.css"
 function App() {
 
   const [tvshows, setTvshows] = useState([])
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState('');
 
   useEffect(() => {
     
