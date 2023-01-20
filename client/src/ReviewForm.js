@@ -9,7 +9,7 @@ function ReviewForm({tvshow, onUpdateTVShow}) {
     function submitNewReview(e){
         e.preventDefault()
 
-        fetch(`/reviews/${tvshow.id}`, {
+        fetch(`/reviews`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -32,12 +32,12 @@ function ReviewForm({tvshow, onUpdateTVShow}) {
     return(
         <div className = "reviewForm">
             <form onSubmit = {submitNewReview}>
-                <div>Write a Review</div>
+                <div className = "reviewTitle">Write a Review</div>
                 <div className = "reviewField">
-                    <input type ="text" name ="review" placeholder ="Comment" onChange ={e => setNewComment(e.target.value)}/>
+                    <input type ="text" name ="review" placeholder ="Comment" value ={newComment} onChange ={e => setNewComment(e.target.value)}/>
                 </div>
                 <div className = "reviewField">
-                    <input type ="number" name ="rating" placeholder ="Rating" onChange ={e => setNewRating(e.target.value)}/>
+                    <input type ="number" name ="rating" placeholder ="Rating" value ={newRating} onChange ={e => setNewRating(e.target.value)}/>
                 </div>
                 <button type = "submit"> Submit Review </button>
             </form>
