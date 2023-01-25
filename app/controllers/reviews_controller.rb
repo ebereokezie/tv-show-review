@@ -3,8 +3,10 @@ class ReviewsController < ApplicationController
 
     def create
         user = User.find(session[:user_id])
-        review = televisionShow.reviews.create(reviews_params)
+        televisionShow = TelevisionShow.find(params[:television_show_id])
         review.user_id = user.id
+        review = televisionShow.reviews.create(reviews_params)
+        
         if review.valid?
             render json: review, status: :created
         else
@@ -24,9 +26,9 @@ class ReviewsController < ApplicationController
 
     private
 
-    def televisionShow
-        @televisionShow ||= TelevisionShow.find(params[:television_show_id])
-    end
+    # def televisionShow
+    #     @televisionShow ||= TelevisionShow.find(params[:television_show_id])
+    # end
 
 
     def reviews_params

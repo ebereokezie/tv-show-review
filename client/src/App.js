@@ -29,7 +29,7 @@ if (!user) return <Login onLogin={setUser} />;
         <TVShows tvshows={tvshows} setTvshows = {setTvshows} />
       </Route>
       <Route exact path="/television_shows/:slug">
-        <TVShow tvshows = {tvshows}/>
+        <TVShow tvshows = {tvshows} setTvshows = {setTvshows}/>
       </Route>
    </Switch>
   );

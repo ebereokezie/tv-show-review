@@ -8,6 +8,8 @@ function TVShows({tvshows, setTvshows }) {
         .then(data => setTvshows(data))
     }, [])
 
+    console.log(tvshows)
+
     const tvShowList = tvshows.map( tvShow => {
         return (<TVShowCard key = {tvShow.id} tvShow ={tvShow} />)
     })
