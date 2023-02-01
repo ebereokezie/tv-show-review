@@ -53,8 +53,8 @@ return (
         <input type="text" name="title" placeholder = "Show Title" value={newShowTitle} onChange={(e)=> setNewShowTitle(e.target.value) } />
         <input type="number" name="Season" placeholder = "Season" value={newShowSeason} onChange={(e)=> setNewShowSeason(e.target.value)} />
         <input type="number" name="Episode" placeholder = "Episode" value={newShowEpisode} onChange={(e)=> setNewShowEpisode(e.target.value)} />
-        <input type="text" name="Description" placeholder = "Short episode description" value={newShowTitle} onChange={(e)=> setNewShowDescription(e.target.value) } />
-        <input type="text" name="Picture" placeholder = "Picture" value={newShowTitle} onChange={(e)=> setNewShowPicture(e.target.value) } />
+        <input type="text" name="Description" placeholder = "Short episode description" value={newShowDescription} onChange={(e)=> setNewShowDescription(e.target.value) } />
+        <input type="text" name="Picture" placeholder = "Picture" value={newShowPicture} onChange={(e)=> setNewShowPicture(e.target.value) } />
         <button type="submit">Submit a Show</button>
     </form>
  </div>

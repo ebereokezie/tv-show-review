@@ -39,7 +39,7 @@ if (!user) return <Login onLogin={setUser} />;
 
   return (
   <div className="App">
-  <NavBar />
+  <NavBar user = {user}/>
    <Switch>
       <Route exact path="/">
         <TVShows tvshows={tvshows} setTvshows = {setTvshows} />

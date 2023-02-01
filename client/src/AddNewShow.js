@@ -7,7 +7,7 @@ function AddNewShow({onAddTVShow, tvshows }){
         <header>Submit a New Show</header>
           <p className = "Home-body">Got a New Show you want to be reviewed? Add it here!</p>
           <br></br>
-          <img className = "size" src= "https://www.shutterstock.com/image-vector/father-switching-channels-watching-tv-260nw-622299953.jpg" />
+          <img className = "size" src= "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcREo9SQxjafrsfWrBdawGik-gKtbPMyFURzDg&usqp=CAU" />
           <br></br>
           <NewShow onAddTVShow ={onAddTVShow} tvshows={tvshows} />
         </div>
