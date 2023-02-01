@@ -13,7 +13,7 @@ class TelevisionShow < ApplicationRecord
 
     def average_rating
         if reviews.present?
-        reviews.average(:rating)
+        reviews.average(:rating).round(2).to_f
         else 
             return 0
         end

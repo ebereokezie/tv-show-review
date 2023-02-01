@@ -21,8 +21,8 @@ class TelevisionShowsController < ApplicationController
     end
 
     def show
-      user = User.find(session[:user_id])
       television_show = TelevisionShow.find_by(slug: params[:slug])
+      
       render json: television_show
     end
 

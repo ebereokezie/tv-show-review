@@ -19,6 +19,14 @@ function App() {
     });
   }, []);
   
+console.log(user)
+
+useEffect(()=> {
+  fetch("/television_shows")
+  .then((data) => data.json())
+  .then(data => setTvshows(data))
+}, [])
+
 console.log(tvshows)
 
 if (!user) return <Login onLogin={setUser} />;
