@@ -3,6 +3,8 @@ import {Route, Switch} from 'react-router-dom'
 import Login from './Login';
 import TVShow from './TVShow';
 import TVShows from './TVShows';
+import NavBar from './NavBar';
+import AddNewShow from './AddNewShow';
 import "../src/App.css"
 
 function App() {
@@ -27,11 +29,17 @@ useEffect(()=> {
   .then(data => setTvshows(data))
 }, [])
 
+function onAddTVShow(newShow){
+  setTvshows((tvshows) => [...tvshows, newShow]);
+}
+
 console.log(tvshows)
 
 if (!user) return <Login onLogin={setUser} />;
 
   return (
+  <div className="App">
+  <NavBar />
    <Switch>
       <Route exact path="/">
         <TVShows tvshows={tvshows} setTvshows = {setTvshows} />
@@ -39,7 +47,11 @@ if (!user) return <Login onLogin={setUser} />;
       <Route exact path="/television_shows/:slug">
         <TVShow tvshows = {tvshows} setTvshows = {setTvshows}/>
       </Route>
+      <Route exact path="/newshow">
+        <AddNewShow tvshows = {tvshows} onAddTVShow = {onAddTVShow} />
+      </Route>
    </Switch>
+   </div>
   );
 }
 
