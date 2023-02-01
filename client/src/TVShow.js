@@ -12,7 +12,6 @@ console.log(slug)
 const [tvshow, setTvShow] = useState({reviews: []})
 const [reviews, setReviews] = useState({})
 
-// const [tvshow, setTvshow] = useState({reviews: []})
 
 useEffect(()=> {
     fetch( `/television_shows/${slug}`)
@@ -20,22 +19,7 @@ useEffect(()=> {
     .then(data => setTvShow(data))
 }, [])
 
-// function handleUpdatedTVShow(updatedTVShowObj){
-//     console.log(updatedTVShowObj)
-   
-//     const newTelevisionShow = tvshows.map((tvshow) => {
-//         if(tvshow.id === updatedTVShowObj.id) {
-//           return updatedTVShowObj
-//         } else {
-//           return tvshow
-//         }
-//       });
-//       setTvshows(newTelevisionShow)
-      
 
-
-
-// }
 console.log(tvshow.reviews)
 
 function handleChange(e){
@@ -70,9 +54,20 @@ console.log(tvshow)
 const review = tvshow.reviews.map((review) => {
     console.log(review)
     return (
-        <Review key ={review.id} review = {review} /> 
+        <Review key ={review.id} review = {review} onUpdateReview = {onUpdateReview} /> 
     )
 })
+
+function onUpdateReview(updatedReviewObj){
+    const updatedReviews = tvshows.review.map((review) => {
+      if(review.id === updatedReviewObj.id) {
+        return updatedReviewObj
+      } else {
+        return review
+      }
+    });
+    setReviews(updatedReviews)
+  }
 
 
     return(

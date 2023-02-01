@@ -1,13 +1,6 @@
-import React, {useState} from 'react'
+import React from 'react'
 
-function ReviewForm({tvshow, submitNewReview, reviews, handleChange  }) {
-
-    const [newComment, setNewComment] = useState("")
-    const [newRating, setNewRating] = useState("")
-   
-
-
-
+function ReviewForm({submitNewReview, reviews, handleChange  }) {
 
     return(
         <div className = "reviewForm">
