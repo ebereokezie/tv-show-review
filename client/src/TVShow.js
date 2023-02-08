@@ -54,7 +54,7 @@ function submitNewReview(e){
 const review = tvshow.reviews.map((review) => {
     console.log(review)
     return (
-        <Review key ={review.id} review = {review} user = {user} onUpdateReview = {onUpdateReview} /> 
+        <Review key ={review.id} review = {review} user = {user} onUpdateReview = {onUpdateReview} onDeleteReview = {onDeleteReview} /> 
     )
 })
 
@@ -71,6 +71,12 @@ function onUpdateReview(updatedReviewObj){
     console.log(tvshow)
   }
 
+  function onDeleteReview(deletedReview) {
+    const deletedReviews = tvshow.reviews.filter((review) => review.id !== deletedReview.id)
+
+    setTvShow({...tvshow, reviews: deletedReviews})
+    
+  }
 
     return(
         <div className ="outer-column">

@@ -157,8 +157,9 @@ button {
   color: white;
   background: black;
   border-radius: 4px;
-  padding: 12px;
+  padding: 16px;
   font-size: 18px;
+  margin-right: 10px;
   cursor: pointer;
   transition: ease-in-out 0.1s;
 }
