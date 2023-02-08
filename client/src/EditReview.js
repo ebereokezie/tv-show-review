@@ -1,25 +1,23 @@
 import React, {useState} from "react"
 
 
-function EditReview({review, tvshow, handleUpdateReview}){
+function EditReview({review, handleUpdateReview}){
     const [newReview, setNewReview] = useState(review)
-
 
 
 
     function handleFormSubmit(e) {
         e.preventDefault();
-        const television_show_id = tvshow.id
         const comment = newReview.comment
         const rating = newReview.rating
     
-        fetch(`/reviews`, {
+        fetch(`/reviews/${review.id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            television_show_id, comment, rating
+             comment, rating
           }),
         })
           .then(data => data.json())

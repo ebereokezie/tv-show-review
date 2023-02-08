@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import TVShowInfo from './TVShowInfo';
 import Review from './Review';
 import ReviewForm from './ReviewForm';
-function TVShow({tvshows, setTvshows}) {
+function TVShow({tvshows, user, setTvshows}) {
 
 console.log(tvshows)
 const {slug} = useParams();
@@ -20,7 +20,7 @@ useEffect(()=> {
 }, [])
 
 
-console.log(tvshow.reviews)
+
 
 function handleChange(e){
     e.preventDefault();
@@ -50,23 +50,25 @@ function submitNewReview(e){
       
        
         }
-console.log(tvshow)
+
 const review = tvshow.reviews.map((review) => {
     console.log(review)
     return (
-        <Review key ={review.id} review = {review} onUpdateReview = {onUpdateReview} /> 
+        <Review key ={review.id} review = {review} user = {user} onUpdateReview = {onUpdateReview} /> 
     )
 })
 
 function onUpdateReview(updatedReviewObj){
-    const updatedReviews = tvshows.review.map((review) => {
+    const updatedReviews = tvshow.reviews.map((review) => {
       if(review.id === updatedReviewObj.id) {
         return updatedReviewObj
       } else {
         return review
       }
     });
-    setReviews(updatedReviews)
+    // setTvShow({reviews: updatedReviews})
+    setTvShow({...tvshow, reviews: updatedReviews})
+    console.log(tvshow)
   }
 
 
@@ -79,7 +81,7 @@ function onUpdateReview(updatedReviewObj){
             </div>
             <div className='inner-column'>
                 <div className = "review-form">
-                    <ReviewForm tvshow = {tvshow}  setReviews = {setReviews} reviews = {reviews} handleChange = {handleChange} submitNewReview = {submitNewReview} />
+                    <ReviewForm tvshow = {tvshow} user = {user} setReviews = {setReviews} reviews = {reviews} handleChange = {handleChange} submitNewReview = {submitNewReview} />
                 </div>
             </div>
         </div>

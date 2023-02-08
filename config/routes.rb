@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   resources :television_shows, param: :slug
-  resources :reviews, only: [:create, :destroy]
+  resources :reviews, only: [:create, :update, :destroy]
 
 end
