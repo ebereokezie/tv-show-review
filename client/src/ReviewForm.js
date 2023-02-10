@@ -1,6 +1,6 @@
 import React from 'react'
 
-function ReviewForm({submitNewReview, reviews, handleChange  }) {
+function ReviewForm({submitNewReview, reviews, handleChange, errors  }) {
 
     return(
         <div className = "reviewForm">
@@ -13,6 +13,11 @@ function ReviewForm({submitNewReview, reviews, handleChange  }) {
                     <input type ="number" name ="rating" placeholder ="Rating 1-5" value ={reviews.rating} onChange ={handleChange}/>
                 </div>
                 <button type = "submit"> Submit Review </button>
+                <div>
+                    {errors.map((err) => (
+                        <ul key={err}>{err}</ul>
+                     ))}
+                </div>
             </form>
         </div>
     )

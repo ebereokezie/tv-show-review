@@ -22,7 +22,7 @@ function LoginForm({ onLogin }) {
       if (data.ok) {
         data.json().then((user) => onLogin(user));
       } else {
-        data.json().then((err) => console.log(err.errors));
+        data.json().then((err) => setErrors(err.errors));
       }
     });
   }
@@ -54,11 +54,11 @@ function LoginForm({ onLogin }) {
           {isLoading ? "Loading..." : "Login"}
         </button>
       </div>
-      {/* <div>
+      <div>
         {errors.map((err) => (
-          <Error key={err}>{err}</Error>
+          <ul key={err}>{err}</ul>
         ))}
-      </div> */}
+      </div>
     </form>
   );
 }

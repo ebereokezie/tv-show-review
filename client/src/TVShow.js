@@ -11,6 +11,7 @@ const {slug} = useParams();
 console.log(slug)
 const [tvshow, setTvShow] = useState({reviews: []})
 const [reviews, setReviews] = useState({})
+const [errors, setErrors] = useState([]);
 
 
 useEffect(()=> {
@@ -41,15 +42,20 @@ function submitNewReview(e){
             body: JSON.stringify({television_show_id, comment, rating
             }),
         })
-        .then ((data) => data.json())
-        .then ((data) => {
-            const reviews = [...tvshow.reviews, data]
-            setTvShow({...tvshow, reviews})
-            setReviews({comment: '', rating: ''})
-        })
-      
+
+        .then((data) => {
+            if (data.ok) {
+              data.json().then((data) => {
+                const reviews = [...tvshow.reviews, data]
+                setTvShow({...tvshow, reviews})
+                setReviews({comment: '', rating: ''})
+            });
+            } else {
+              data.json().then((err) => setErrors(err.errors)
+              );
+            }      
        
-        }
+        })}
 
 const review = tvshow.reviews.map((review) => {
     console.log(review)
@@ -66,7 +72,6 @@ function onUpdateReview(updatedReviewObj){
         return review
       }
     });
-    // setTvShow({reviews: updatedReviews})
     setTvShow({...tvshow, reviews: updatedReviews})
     console.log(tvshow)
   }
@@ -87,7 +92,7 @@ function onUpdateReview(updatedReviewObj){
             </div>
             <div className='inner-column'>
                 <div className = "review-form">
-                    <ReviewForm tvshow = {tvshow} user = {user} setReviews = {setReviews} reviews = {reviews} handleChange = {handleChange} submitNewReview = {submitNewReview} />
+                    <ReviewForm tvshow = {tvshow} user = {user} setReviews = {setReviews} reviews = {reviews} handleChange = {handleChange} submitNewReview = {submitNewReview} errors = {errors} />
                 </div>
             </div>
         </div>
