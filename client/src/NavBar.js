@@ -10,13 +10,23 @@ import { NavLink } from "react-router-dom";
     background: "greenyellow"
    };
 
-function NavBar({user}){
+
+function NavBar({user, setUser}){
+
+    function handleLogoutClick() {
+        fetch("/logout", { method: "DELETE" }).then((r) => {
+          if (r.ok) {
+            setUser(null);
+          }
+        });
+      }
     return(
         <div className = "Navbar">
             
             <NavLink to = "/" exact style = {linkStyles}>Home</NavLink>
             <NavLink to = "/newshow" exact style = {linkStyles}>Add a New Show</NavLink>
              Hello, {user.username}
+            <button className = "logoutButton" onClick={handleLogoutClick}>Log Out</button>
         </div>
     )
 }

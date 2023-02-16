@@ -33,13 +33,12 @@ function onAddTVShow(newShow){
   setTvshows((tvshows) => [...tvshows, newShow]);
 }
 
-console.log(tvshows)
 
 if (!user) return <Login onLogin={setUser} />;
 
   return (
   <div className="App">
-  <NavBar user = {user}/>
+  <NavBar user = {user} setUser = {setUser}/>
    <Switch>
       <Route exact path="/">
         <TVShows tvshows={tvshows} setTvshows = {setTvshows} />

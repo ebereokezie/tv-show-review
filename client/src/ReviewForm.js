@@ -1,7 +1,21 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 
 function ReviewForm({submitNewReview, reviews, handleChange, errors  }) {
 
+    const [visible, setVisible] = useState(false)
+
+    useEffect(() => {
+        if(!errors){
+            setVisible(false)
+            return
+        }
+
+        setVisible(true)
+        const timer = setTimeout(() => {
+            setVisible(false)
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, [errors])
     return(
         <div className = "reviewForm">
             <form onSubmit = {submitNewReview}>
@@ -14,9 +28,9 @@ function ReviewForm({submitNewReview, reviews, handleChange, errors  }) {
                 </div>
                 <button type = "submit"> Submit Review </button>
                 <div>
-                    {errors.map((err) => (
+                    {visible ? (errors.map((err) => (
                         <ul key={err}>{err}</ul>
-                     ))}
+                     ))) : (<> </>)}
                 </div>
             </form>
         </div>
