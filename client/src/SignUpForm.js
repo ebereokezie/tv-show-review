@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function SignUpForm({ onLogin }) {
   const [username, setUsername] = useState("");
@@ -6,6 +6,7 @@ function SignUpForm({ onLogin }) {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,10 +27,23 @@ function SignUpForm({ onLogin }) {
       if (data.ok) {
         data.json().then((user) => onLogin(user));
       } else {
-        data.json().then((err) => console.log(err.errors));
+        data.json().then((err) => setErrors(err.errors));
       }
     });
   }
+
+  useEffect(() => {
+    if(!errors){
+        setVisible(false)
+        return
+    }
+
+    setVisible(true)
+    const timer = setTimeout(() => {
+        setVisible(false)
+    }, 5000);
+    return () => clearTimeout(timer);
+}, [errors])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -66,11 +80,10 @@ function SignUpForm({ onLogin }) {
       <div>
         <button type="submit">{isLoading ? "Loading..." : "Sign Up"}</button>
       </div>
-      {/* <div>
-        {errors.map((err) => (
-          <Error key={err}>{err}</Error>
-        ))}
-      </div> */}
+      <div>{visible ? (errors.map((err) => (
+                        <ul key={err}>{err}</ul>
+                     ))) : (<> </>)}
+      </div>
     </form>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 
 function LoginForm({ onLogin }) {
@@ -6,6 +6,7 @@ function LoginForm({ onLogin }) {
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [visible, setVisible] = useState(false)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -26,6 +27,21 @@ function LoginForm({ onLogin }) {
       }
     });
   }
+
+  
+
+    useEffect(() => {
+        if(!errors){
+            setVisible(false)
+            return
+        }
+
+        setVisible(true)
+        const timer = setTimeout(() => {
+            setVisible(false)
+        }, 5000);
+        return () => clearTimeout(timer);
+    }, [errors])
 
   return (
     <form onSubmit={handleSubmit}>
@@ -55,9 +71,9 @@ function LoginForm({ onLogin }) {
         </button>
       </div>
       <div>
-        {errors.map((err) => (
-          <ul key={err}>{err}</ul>
-        ))}
+      {visible ? (errors.map((err) => (
+                        <ul key={err}>{err}</ul>
+                     ))) : (<> </>)}
       </div>
     </form>
   );
