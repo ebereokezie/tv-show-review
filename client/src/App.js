@@ -43,7 +43,7 @@ if (!user) return <Login onLogin={setUser} />;
       <Route exact path="/">
         <TVShows tvshows={tvshows} setTvshows = {setTvshows} />
       </Route>
-      <Route exact path="/television_shows/:slug">
+      <Route exact path="/tvshows/:slug">
         <TVShow tvshows = {tvshows} user = {user} setTvshows = {setTvshows}/>
       </Route>
       <Route exact path="/newshow">
