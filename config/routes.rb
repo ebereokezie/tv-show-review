@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :television_shows, param: :slug
   resources :reviews, only: [:create, :update, :destroy]
 
+
+  root to: 'television_shows#index'
 end
