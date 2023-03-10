@@ -11,7 +11,6 @@ function TVShowInfo({tvshow}) {
            <h2 className= "tvinfoEpisode">Episode: {tvshow.episode}</h2>
            <div className= "tvinfoDescription">Synopsis: {tvshow.description}</div>
            <div className = "tvinfoAverageRating">Average Rating: {tvshow.average_rating}</div>
-           {/* <div className = "tvshowTotalReviews"> User reviews: {tvshow.reviews.length}</div> */}
 
         
     </div>

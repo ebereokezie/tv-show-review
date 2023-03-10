@@ -22,11 +22,9 @@ useEffect(()=> {
 
 
 
-
 function handleChange(e){
     e.preventDefault();
-    setReviews(Object.assign({...reviews, [e.target.name]: e.target.value}))
-    console.log('review:', reviews)  
+    setReviews(Object.assign({...reviews, [e.target.name]: e.target.value})) 
     }
 
 function submitNewReview(e){

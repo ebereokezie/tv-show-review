@@ -1,5 +1,14 @@
 class ReviewsController < ApplicationController
-    before_action :authorized
+    skip_before_action :authorized
+
+    def index
+
+        # user = User.find(session [:user_id])
+        reviews = Review.all
+
+        render json: reviews
+
+    end 
 
     def create
         user = User.find(session[:user_id])

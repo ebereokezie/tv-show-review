@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { NavLink } from "react-router-dom"
 
 function TVShowCard({tvShow}) {
  
@@ -10,7 +11,7 @@ function TVShowCard({tvShow}) {
            <div className= "TVShowEpisode">Episode: {tvShow.episode}</div>
            <div className= "TVShowDescription">Synopsis: {tvShow.description}</div>
            <div className = "TVShowAverageRating">Average Rating: {tvShow.average_rating}</div>
-           <div className = "TVShowLinkToPage"> <a href = {`/television_shows/${tvShow.slug}`}>View {tvShow.title} reviews! </a>  </div>
+           <NavLink to = {`/television_shows/${tvShow.slug}`}>View {tvShow.title} reviews!</NavLink>
 
         
     </div>
