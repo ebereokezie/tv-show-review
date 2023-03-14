@@ -26,7 +26,7 @@ function Review ({review, user, onUpdateReview, onDeleteReview}){
   const editUserReview =  editReview ? (<EditReview key = {review.id}  review = {review} handleUpdateReview = {handleUpdateReview} />
             ) : (
             <>
-            <div className = "username">{review.user.username}</div>
+            <div className = "username">{review.user.username} </div>
             <div className = "comments">Comment: {review.comment}</div>
             <div className = "rating-container">
                 <div className = "ratings">Rating: {review.rating}/5</div>
@@ -42,13 +42,13 @@ function Review ({review, user, onUpdateReview, onDeleteReview}){
             )
 
 
-    console.log(user)
+    console.log(review)
     return(
         <div className = "reviewCard">
             
             {isReviewUser ? (editUserReview) : ( 
             <>
-            <div className = "username">{review.user.username}</div>
+            <div className = "username">{review.user.username} </div>
             <div className = "comments">Comment: {review.comment}</div>
             <div className = "rating-container">
                 <div className = "ratings">Rating: {review.rating}/5</div>

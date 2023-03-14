@@ -6,6 +6,7 @@ import TVShows from './TVShows';
 import NavBar from './NavBar';
 import AddNewShow from './AddNewShow';
 import "../src/App.css"
+import MyReviews from './MyReviews';
 
 function App() {
 
@@ -48,6 +49,9 @@ if (!user) return <Login onLogin={setUser} />;
       </Route>
       <Route exact path="/newshow">
         <AddNewShow tvshows = {tvshows} onAddTVShow = {onAddTVShow} />
+      </Route>
+      <Route exact path="/myreviews">
+        <MyReviews user = {user} />
       </Route>
    </Switch>
    </div>
