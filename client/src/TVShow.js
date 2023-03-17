@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import TVShowInfo from './TVShowInfo';
 import Review from './Review';
 import ReviewForm from './ReviewForm';
-function TVShow({tvshows, user, setTvshows}) {
+function TVShow({tvshows, user, setTvshows, setUser}) {
 
 console.log(tvshows)
 const {slug} = useParams();
@@ -45,7 +45,9 @@ function submitNewReview(e){
             if (data.ok) {
               data.json().then((data) => {
                 const reviews = [...tvshow.reviews, data]
+                const userreviews = [...user.reviews, data]
                 setTvShow({...tvshow, reviews})
+                setUser({...user, reviews: userreviews})
                 setReviews({comment: '', rating: ''})
             });
             } else {
@@ -61,23 +63,34 @@ const review = tvshow.reviews.map((review) => {
         <Review key ={review.id} review = {review} user = {user} onUpdateReview = {onUpdateReview} onDeleteReview = {onDeleteReview} /> 
     )
 })
-
+console.log(user.reviews)
 function onUpdateReview(updatedReviewObj){
-    const updatedReviews = tvshow.reviews.map((review) => {
+    const tvUpdatedReviews = tvshow.reviews.map((review) => {
       if(review.id === updatedReviewObj.id) {
         return updatedReviewObj
       } else {
         return review
       }
     });
-    setTvShow({...tvshow, reviews: updatedReviews})
+
+    const userUpdatedReviews = user.reviews.map((review) => {
+      if(review.id === updatedReviewObj.id) {
+        return updatedReviewObj
+      } else {
+        return review
+      }
+    })
+    setTvShow({...tvshow, reviews: tvUpdatedReviews})
+    setUser({...user, reviews: userUpdatedReviews })
     console.log(tvshow)
   }
 
   function onDeleteReview(deletedReview) {
-    const deletedReviews = tvshow.reviews.filter((review) => review.id !== deletedReview.id)
+    const tvDeletedReviews = tvshow.reviews.filter((review) => review.id !== deletedReview.id)
+    const userDeletedReviews = user.reviews.filter((review) => review.id !== deletedReview.id)
 
-    setTvShow({...tvshow, reviews: deletedReviews})
+    setTvShow({...tvshow, reviews: tvDeletedReviews})
+    setUser({...user, reviews: userDeletedReviews })
     
   }
 
