@@ -1,9 +1,9 @@
 class ReviewsController < ApplicationController
-    skip_before_action :authorized
+    skip_before_action :authorized, only: [:index]
 
     def index
 
-        # user = User.find(session [:user_id])
+     
         reviews = Review.all
 
         render json: reviews
@@ -24,10 +24,17 @@ class ReviewsController < ApplicationController
     end
 
     def update
-        review = Review.find(params[:id])
-        if review 
-          review.update(reviews_params)
-          render json: review
+        review = Review.find_by_id(params[:id])
+        if review
+            if review.user_id == session[:user_id]
+                if review.update(reviews_params)
+                    render json: review
+                else 
+                    render json: {errors: review.errors.full_messages}, status: :unprocessable_entity
+                end
+            else 
+                render json: {error: "Incorrect user"}, status: :unauthorized
+            end
         else
           render json: {error: "Review not found"}, status: :not_found
         end
@@ -35,11 +42,16 @@ class ReviewsController < ApplicationController
 
     def destroy
         review = Review.find(params[:id])
-        if review.destroy
-            head :no_content
-        else
-            render json: {errors: review.errors.full_messages}, status: :unprocessable_entity
-        end
+        if review
+            if review.user_id == session[:user_id]
+                review.destroy
+                head :no_content
+            else
+                render json: {errors: review.errors.full_messages}, status: :unprocessable_entity
+             end
+         else
+            render json: {error: "Review not found"}, status: :not_found
+         end
     end
 
     private
