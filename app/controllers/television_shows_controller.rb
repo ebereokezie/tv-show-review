@@ -1,5 +1,4 @@
 class TelevisionShowsController < ApplicationController
-    # rescue_from ActiveRecord::RecordNotFound, with: :render_not_found_response
     skip_before_action :authorized, only: [:index, :show]
 
     def index
@@ -47,10 +46,6 @@ class TelevisionShowsController < ApplicationController
 
   
     private
-  
-    def render_not_found_response
-      render json: { error: "TV show not found" }, status: :not_found
-    end
 
     def tv_show_params
         params.permit(:title, :season, :episode, :description, :picture_url)
