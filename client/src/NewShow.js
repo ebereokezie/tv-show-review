@@ -1,4 +1,4 @@
-import React, { useState} from "react"
+import React, { useState, useEffect} from "react"
 
 
 function NewShow({onAddTVShow, tvshows}) {
@@ -11,6 +11,10 @@ function NewShow({onAddTVShow, tvshows}) {
       const [newShowEpisode, setNewShowEpisode] = useState("")
       const [newShowDescription, setNewShowDescription] = useState("")
       const [newShowPicture, setNewShowPicture] = useState("")
+      const [visible, setVisible] = useState(false)
+      const [errors, setErrors] = useState([]);
+
+   
    
 
       
@@ -31,7 +35,8 @@ function NewShow({onAddTVShow, tvshows}) {
             "picture_url": newShowPicture
           }),
         })
-          .then(data => data.json())
+          .then(data =>{
+            if (data.ok) { data.json()
           .then(data => onAddTVShow(data))
           
           setNewShowTitle("")
@@ -39,10 +44,26 @@ function NewShow({onAddTVShow, tvshows}) {
           setNewShowEpisode("")
           setNewShowDescription("")
           setNewShowPicture("")
-          
+            }else {
+              data.json().then((err) => setErrors(err.errors)
+              );
+            }})
           ;
         }
 
+
+        useEffect(() => {
+          if(!errors){
+              setVisible(false)
+              return
+          }
+  
+          setVisible(true)
+          const timer = setTimeout(() => {
+              setVisible(false)
+          }, 5000);
+          return () => clearTimeout(timer);
+      }, [errors])
      
 
 
@@ -55,6 +76,11 @@ return (
         <input type="number" name="Episode" placeholder = "Episode" value={newShowEpisode} onChange={(e)=> setNewShowEpisode(e.target.value)} />
         <input type="text" name="Description" placeholder = "Short episode description" value={newShowDescription} onChange={(e)=> setNewShowDescription(e.target.value) } />
         <input type="text" name="Picture" placeholder = "Picture" value={newShowPicture} onChange={(e)=> setNewShowPicture(e.target.value) } />
+        <div>
+                    {visible ? (errors.map((err) => (
+                        <ul key={err}>{err}</ul>
+                     ))) : (<> </>)}
+                </div>
         <button type="submit">Submit a Show</button>
     </form>
  </div>
